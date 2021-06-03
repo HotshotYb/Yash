@@ -1,0 +1,38 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_eip.lb (expand)" [label = "aws_eip.lb", shape = "box"]
+		"[root] aws_instance.myec2 (expand)" [label = "aws_instance.myec2", shape = "box"]
+		"[root] aws_security_group.allow_tls (expand)" [label = "aws_security_group.allow_tls", shape = "box"]
+		"[root] module.EC2.aws_instance.EC2-lab1 (orphan)" [label = "module.EC2.aws_instance.EC2-lab1", shape = "box"]
+		"[root] module.VPC.aws_vpc.vpc1 (orphan)" [label = "module.VPC.aws_vpc.vpc1", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] var.vpc_azs" [label = "var.vpc_azs", shape = "note"]
+		"[root] var.vpc_cidr" [label = "var.vpc_cidr", shape = "note"]
+		"[root] var.vpc_name" [label = "var.vpc_name", shape = "note"]
+		"[root] var.vpc_private_subnets" [label = "var.vpc_private_subnets", shape = "note"]
+		"[root] var.vpc_public_subnets" [label = "var.vpc_public_subnets", shape = "note"]
+		"[root] aws_eip.lb (expand)" -> "[root] aws_instance.myec2 (expand)"
+		"[root] aws_instance.myec2 (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] aws_security_group.allow_tls (expand)" -> "[root] aws_eip.lb (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_security_group.allow_tls (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] module.EC2 (close)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] module.EC2.aws_instance.EC2-lab1 (orphan)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] module.VPC (close)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] module.VPC.aws_vpc.vpc1 (orphan)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] var.vpc_azs"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] var.vpc_cidr"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] var.vpc_name"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] var.vpc_private_subnets"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] var.vpc_public_subnets"
+		"[root] module.EC2.aws_instance.EC2-lab1 (orphan)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] module.VPC.aws_vpc.vpc1 (orphan)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_security_group.allow_tls (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] module.EC2.aws_instance.EC2-lab1 (orphan)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] module.VPC.aws_vpc.vpc1 (orphan)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+	}
+}
+
